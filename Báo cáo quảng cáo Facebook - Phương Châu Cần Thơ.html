@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Báo cáo quảng cáo Facebook - Phương Châu Cần Thơ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --bg: #F4F7F9;
+    --surface: #FFFFFF;
+    --ink: #14242D;
+    --muted: #55656F;
+    --line: #D9E1E6;
+    --accent: #0C6A74;
+    --urgent: #B42318;
+    --urgent-bg: #FCE8E6;
+    --warn: #8F5500;
+    --warn-bg: #FFF1D6;
+    --good: #1B7548;
+    --good-bg: #E1F3E8;
+    --bar: #0C6A74;
+    --bar-bg: #E3EBEF;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0E1920;
+      --surface: #15252E;
+      --ink: #E7EFF3;
+      --muted: #94A7B2;
+      --line: #28393F;
+      --accent: #5CBFC9;
+      --urgent: #FF9189;
+      --urgent-bg: #3B1E1C;
+      --warn: #F4BD62;
+      --warn-bg: #3B2E12;
+      --good: #72CB9B;
+      --good-bg: #12301F;
+      --bar: #5CBFC9;
+      --bar-bg: #243842;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0E1920;
+    --surface: #15252E;
+    --ink: #E7EFF3;
+    --muted: #94A7B2;
+    --line: #28393F;
+    --accent: #5CBFC9;
+    --urgent: #FF9189;
+    --urgent-bg: #3B1E1C;
+    --warn: #F4BD62;
+    --warn-bg: #3B2E12;
+    --good: #72CB9B;
+    --good-bg: #12301F;
+    --bar: #5CBFC9;
+    --bar-bg: #243842;
+  }
+  html { height: 100%; scroll-padding-top: env(safe-area-inset-top, 0px); }
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Be Vietnam Pro", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+  }
+  .page { max-width: 980px; margin: 0 auto; padding: 32px 20px 64px; }
+  h1 { font-size: clamp(1.6rem, 4.6vw, 2.3rem); line-height: 1.2; margin: 0 0 10px; font-weight: 700; letter-spacing: -0.01em; }
+  h2 { font-size: 1.35rem; line-height: 1.3; margin: 0 0 6px; font-weight: 700; }
+  h3 { font-size: 1.02rem; margin: 28px 0 8px; font-weight: 600; }
+  p { margin: 0 0 12px; max-width: 70ch; }
+  .lede { color: var(--muted); max-width: 64ch; margin-bottom: 4px; }
+  section { margin-top: 56px; }
+  .muted { color: var(--muted); }
+
+  /* Status strip: the page's one memorable element */
+  .strip { display: flex; gap: 4px; margin: 22px 0 10px; height: 54px; }
+  .strip button {
+    font: inherit; border: 0; border-radius: 6px; cursor: pointer;
+    font-weight: 700; font-size: 1.05rem; color: inherit; padding: 0;
+    display: flex; align-items: center; justify-content: center;
+    outline-offset: 2px;
+  }
+  .strip button:focus-visible { outline: 3px solid var(--accent); }
+  .strip .u { flex: 2 1 0; background: var(--urgent-bg); color: var(--urgent); }
+  .strip .w { flex: 10 1 0; background: var(--warn-bg); color: var(--warn); }
+  .strip .g { flex: 10 1 0; background: var(--good-bg); color: var(--good); }
+  .strip button[aria-pressed="true"] { box-shadow: inset 0 0 0 3px currentColor; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.9rem; color: var(--muted); margin-bottom: 4px; }
+  .legend b { color: var(--ink); font-weight: 600; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 12px; }
+  .chip {
+    font: inherit; font-size: 0.88rem; padding: 6px 14px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  }
+  .chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .chip:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+  .scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+  th, td { padding: 10px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+  th { font-weight: 600; color: var(--muted); background: var(--surface); white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .ad { font-weight: 600; min-width: 190px; }
+  .camp { color: var(--muted); font-size: 0.82rem; min-width: 170px; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+  .badge.u { background: var(--urgent-bg); color: var(--urgent); }
+  .badge.w { background: var(--warn-bg); color: var(--warn); }
+  .badge.g { background: var(--good-bg); color: var(--good); }
+  .hit { color: var(--urgent); font-weight: 700; }
+  .note { color: var(--muted); font-size: 0.82rem; min-width: 190px; }
+
+  .bar { position: relative; height: 10px; background: var(--bar-bg); border-radius: 5px; min-width: 120px; }
+  .bar i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--bar); border-radius: 5px; }
+  .bar.cost i { background: var(--accent); }
+  .cpr { display: flex; align-items: center; gap: 10px; }
+  .cpr span { min-width: 64px; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  .callout { border-left: 4px solid var(--accent); background: var(--surface); padding: 14px 16px; border-radius: 0 8px 8px 0; margin: 18px 0; max-width: 78ch; border-top: 1px solid var(--line); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .callout p:last-child { margin-bottom: 0; }
+  .down { color: var(--urgent); font-weight: 600; }
+  .up { color: var(--good); font-weight: 600; }
+  ul.plain { margin: 0; padding-left: 20px; max-width: 76ch; }
+  ul.plain li { margin-bottom: 8px; }
+  footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+  @media print {
+    .strip, .chips { display: none; }
+    body { background: #fff; color: #000; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <header>
+    <h1>2 quảng cáo cần xử lý ngay, 10 cần theo dõi</h1>
+    <p class="lede">Báo cáo quảng cáo Facebook, tài khoản Phương Châu Cần Thơ. Phần 1 xét 22 quảng cáo đang chạy trong 14 ngày (19/9 đến 2/10/2026). Phần 2 xét chi phí theo chiến dịch trong 30 ngày gần nhất.</p>
+
+    <div class="strip" role="group" aria-label="Lọc theo mức cảnh báo">
+      <button class="u" data-lv="u" aria-pressed="false" aria-label="Khẩn cấp: 2 quảng cáo">2</button>
+      <button class="w" data-lv="w" aria-pressed="false" aria-label="Cảnh báo: 10 quảng cáo">10</button>
+      <button class="g" data-lv="g" aria-pressed="false" aria-label="Tốt: 10 quảng cáo">10</button>
+    </div>
+    <div class="legend">
+      <span><b>Khẩn cấp</b> vượt cả hai ngưỡng, hoặc CTR giảm từ 50%, hoặc tần suất từ 4,0</span>
+      <span><b>Cảnh báo</b> vượt một ngưỡng</span>
+      <span><b>Tốt</b> không vượt ngưỡng nào</span>
+    </div>
+  </header>
+
+  <section id="p1">
+    <h2>Phần 1. Sức khỏe quảng cáo trong 14 ngày</h2>
+    <p class="lede">Gắn cờ khi CTR giảm hơn 20% so với đỉnh hoặc tần suất trên 3,0. Chọn một mức bên dưới để lọc bảng.</p>
+
+    <div class="chips" id="chips" role="group" aria-label="Lọc bảng">
+      <button class="chip" data-lv="all" aria-pressed="true">Tất cả (22)</button>
+      <button class="chip" data-lv="u" aria-pressed="false">Khẩn cấp (2)</button>
+      <button class="chip" data-lv="w" aria-pressed="false">Cảnh báo (10)</button>
+      <button class="chip" data-lv="g" aria-pressed="false">Tốt (10)</button>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Mức</th>
+            <th>Quảng cáo</th>
+            <th>Chiến dịch</th>
+            <th class="num">CTR đỉnh</th>
+            <th class="num">CTR 3 ngày gần nhất</th>
+            <th class="num">Thay đổi</th>
+            <th class="num">Tần suất</th>
+            <th class="num">Chi 14 ngày (triệu đ)</th>
+            <th>Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+
+    <h3>Cách tính</h3>
+    <ul class="plain">
+      <li>CTR đỉnh là trung bình 3 ngày cao nhất trong 14 ngày (có trọng số theo lượt hiển thị). CTR gần nhất là trung bình 3 ngày 30/9 đến 2/10.</li>
+      <li>Tần suất tính gộp cả 14 ngày. CTR là tỷ lệ mọi lượt nhấp trên lượt hiển thị.</li>
+      <li>Các quảng cáo tiếp cận và tương tác có CTR vốn chỉ 0,1 đến 0,5%, nên mức giảm 25 đến 50% có thể chỉ là dao động. Riêng "dinh dưỡng post t7" là tín hiệu thật: tần suất 4,04 trên tập khoảng 17.000 người, tức đối tượng đã bão hòa.</li>
+      <li>Chưa phân loại 3 quảng cáo quá ít dữ liệu: Sama tháng 8, bài trade, bài 1 photo nội soi AI.</li>
+      <li>Hai ưu đãi cần kiểm tra còn hiệu lực: "Nhi dậy thì sớm ưu đãi t9/2026" và "BHYT thông tuyến tháng 8" vẫn đang chạy sang tháng 10.</li>
+    </ul>
+  </section>
+
+  <section id="p2">
+    <h2>Phần 2. Chi phí theo chiến dịch trong 30 ngày</h2>
+    <p class="lede">Tổng chi khoảng 101,5 triệu đồng cho 24 chiến dịch.</p>
+
+    <div class="callout">
+      <p><b>Chưa tính được ROAS.</b> Cả 24 chiến dịch không có dữ liệu giá trị mua hàng, nên Meta không ghi nhận doanh thu. Phần này dùng chi phí trên mỗi kết quả làm chỉ số thay thế.</p>
+      <p>Một cuộc trò chuyện ở sản khoa (gói đi sinh) có giá trị khác hẳn một cuộc ở nội soi, và cuộc trò chuyện cũng không so sánh trực tiếp với lead. Vì vậy chỉ nên so sánh trong cùng một loại kết quả.</p>
+    </div>
+
+    <h3>Chiến dịch nhắn tin: chi phí mỗi cuộc trò chuyện</h3>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Chiến dịch</th>
+            <th class="num">Chi (triệu đ)</th>
+            <th class="num">Cuộc trò chuyện</th>
+            <th>Chi phí mỗi cuộc (đồng)</th>
+          </tr>
+        </thead>
+        <tbody id="msg"></tbody>
+      </table>
+    </div>
+
+    <h3>Chiến dịch form lead: chi phí mỗi lead</h3>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Chiến dịch</th>
+            <th class="num">Chi (triệu đ)</th>
+            <th class="num">Lead</th>
+            <th>Chi phí mỗi lead (đồng)</th>
+          </tr>
+        </thead>
+        <tbody id="lead"></tbody>
+      </table>
+    </div>
+    <p class="muted" style="margin-top:8px">Dòng có dấu (*) do tự tính từ chi tiêu chia số lead, vì Meta báo kết quả hỗn hợp.</p>
+
+    <h3>Chiến dịch tiếp cận và tương tác</h3>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Chiến dịch</th>
+            <th class="num">Chi (triệu đ)</th>
+            <th class="num">Người tiếp cận</th>
+            <th class="num">Chi phí mỗi người (đồng)</th>
+            <th class="num">CTR</th>
+          </tr>
+        </thead>
+        <tbody id="reach"></tbody>
+      </table>
+    </div>
+    <p class="muted" style="margin-top:8px">Nhóm này chiếm 22,1 triệu đồng (22% ngân sách) và chưa đo được chuyển đổi trực tiếp.</p>
+
+    <h3>Đề xuất phân bổ lại khoảng 12 triệu đồng mỗi tháng</h3>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Hành động</th>
+            <th>Chiến dịch</th>
+            <th class="num">Thay đổi (triệu đ)</th>
+          </tr>
+        </thead>
+        <tbody id="plan"></tbody>
+      </table>
+    </div>
+    <ul class="plain" style="margin-top:14px">
+      <li>Nên tăng dần, mỗi lần không quá 20% và cách nhau 3 đến 4 ngày, để chiến dịch không bị đưa lại vào giai đoạn học.</li>
+      <li>Nếu chi phí mỗi kết quả giữ nguyên, mức này có thể thêm khoảng 400 đến 500 cuộc trò chuyện. Đây là ước tính thô, thực tế thường thấp hơn khi tăng ngân sách.</li>
+      <li>Đề xuất tối ưu số lượng liên hệ, chưa phải doanh thu. Để tính ROAS ước tính, cần doanh thu trung bình mỗi ca và tỷ lệ chốt theo chuyên khoa từ CRM.</li>
+      <li>Chiến dịch "Bệnh viện - ACP 2026" nên giữ nguyên trạng thái tạm dừng (khoảng 391.000 đ mỗi lead).</li>
+    </ul>
+  </section>
+
+  <footer>
+    Dữ liệu từ Meta Ads, lấy ngày 3/10/2026. Trang này là bản chụp tại thời điểm đó và không tự cập nhật.
+  </footer>
+</main>
+
+<script>
+(function () {
+  function dot(n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
+  function dec(n, d) { return n.toFixed(d).replace(".", ","); }
+  function tr(n) { return dec(n / 1e6, 2); }
+
+  var LV = { u: "Khẩn cấp", w: "Cảnh báo", g: "Tốt" };
+
+  // lv, ad, campaign, peak CTR, recent CTR, change %, frequency, spend (VND), note
+  var ADS = [
+    ["u", "dinh dưỡng post t7", "Nhi khoa - tổng quát", 1.45, 1.02, -30, 4.04, 2809129, "Vượt cả hai ngưỡng. Tần suất tăng dần trong 14 ngày."],
+    ["u", "PHỤ KHOA_NGÀY HỒNG", "PHỤ KHOA_TƯƠNG TÁC 2026", 0.33, 0.16, -52, 1.34, 982243, "CTR giảm hơn một nửa. Chiến dịch tương tác nên biên độ dao động lớn."],
+    ["w", "Nhi dậy thì sớm ưu đãi t9/2026", "Nhi khoa-dậy thì sớm tháng 6", 3.33, 2.24, -33, 2.50, 1390150, "Ưu đãi tháng 9, kiểm tra còn hiệu lực."],
+    ["w", "Bài viết 4 ảnh", "Sản Khoa_Trung tâm Thai kỳ nguy cơ cao", 0.25, 0.15, -41, 1.48, 1408603, "Chiến dịch tiếp cận, CTR nền rất thấp."],
+    ["w", "Thai kỳ nguy cơ cao 4 ảnh", "Sản Khoa_Trung tâm Thai kỳ nguy cơ cao", 0.20, 0.13, -36, 1.48, 1406993, "Chiến dịch tiếp cận, CTR nền rất thấp."],
+    ["w", "Bài phương pháp mổ trĩ", "ĐA KHOA_CHẠY TIẾP CẬN", 0.44, 0.32, -27, 1.49, 1409583, "Chiến dịch tiếp cận."],
+    ["w", "clip kol Niệm", "SẢN KHOA CHẠY TIẾP CẬN 2026", 0.60, 0.44, -26, 1.52, 1403725, "CTR giảm 4 ngày liên tiếp."],
+    ["w", "Bài viết 1 ảnh", "SẢN KHOA_CHẠY TIẾP CẬN", 0.18, 0.14, -25, 1.46, 2113387, "Chiến dịch tiếp cận."],
+    ["w", "ĐA KHOA- POST Nội soi 5 không", "ĐA KHOA - PR NỘI SOI TIÊU HÓA", 5.76, 4.50, -22, 2.07, 1399597, "CTR vẫn cao, vượt ngưỡng không nhiều."],
+    ["w", "Gói tai mũi họng về trong ngày", "Đa Khoa- Phẫu thuật TMH t7", 5.24, 4.13, -21, 2.39, 1560982, "CTR vẫn cao, vượt ngưỡng không nhiều."],
+    ["w", "Bài viết 1 ảnh ưu đãi", "Sản Khoa_Gói ở cử sau sinh 2026", 1.62, 1.61, 0, 3.29, 2647458, "CTR ổn, vượt ngưỡng tần suất."],
+    ["w", "BHYT thông tuyến tháng 8", "Đa Khoa_Chiến dịch BHYT 2026", 3.41, 2.83, -17, 3.21, 1656921, "Vượt ngưỡng tần suất. Nội dung \"tháng 8\" vẫn chạy tháng 10."],
+    ["g", "clip nội soi", "ĐA KHOA_TRUNG TÂM NỘI SOI TIÊU HÓA_LEADS", 5.48, 4.82, -12, 1.52, 2098607, ""],
+    ["g", "Bài viết nội soi AI nhiều ảnh", "đa khoa - Nội soi AI t7", 11.38, 10.60, -7, 1.68, 1383801, ""],
+    ["g", "Post nhiều ảnh viral_tháng 4", "Nhi Khoa_ GÓI KHÁM TỔNG QUÁT_LEADS", 3.00, 3.00, 0, 2.18, 2747498, "Đang ở mức cao nhất."],
+    ["g", "Đa Khoa_GÓI ĐIỀU TRỊ BÉO PHÌ", "Sản Khoa_Sama T8", 2.93, 2.56, -13, 2.08, 4025137, ""],
+    ["g", "Bài BS Duy Linh", "Phụ Khoa_Chiến dịch Trade 2026", 7.25, 6.90, -5, 2.31, 1394539, ""],
+    ["g", "ĐA KHOA- bài trĩ Laser", "ĐA KHOA - PR NỘI SOI TIÊU HÓA", 3.26, 2.87, -12, 2.39, 1419589, ""],
+    ["g", "SẢN_CUỘC THI QUAY CLIP", "SẢN KHOA CHẠY TIẾP CẬN 2026", 0.14, 0.14, -4, 1.50, 2109071, "Đạt tiêu chí, nhưng CTR chỉ 0,13% với hơn 365.000 lượt hiển thị."],
+    ["g", "Sản_Clip ở cử", "Sản Khoa_Gói ở cử sau sinh 2026", 2.09, 2.27, 0, 2.92, 2957197, "Theo dõi: tần suất sát 3,0, lượt hiển thị tụt mạnh những ngày gần đây."],
+    ["g", "Sản-đi sinh từ 26tr", "SẢN KHOA_PR TRUNG TÂM Ở CỮ_THU LEADS", 2.03, 1.85, -9, 2.85, 2754552, "Theo dõi: tần suất 2,85, sát ngưỡng."],
+    ["g", "Bài PR", "Sản Khoa_Gói ở cử sau sinh 2026", 2.33, 1.95, -16, 2.38, 1412577, "Theo dõi: CTR giảm 4 ngày liên tiếp."]
+  ];
+
+  var rows = document.getElementById("rows");
+  var current = "all";
+
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function renderAds() {
+    var html = "";
+    ADS.forEach(function (a) {
+      if (current !== "all" && a[0] !== current) return;
+      var chgCls = a[5] <= -20 ? "hit" : "";
+      var freqCls = a[6] > 3.0 ? "hit" : "";
+      var chgTxt = a[5] === 0 ? "0%" : (a[5] > 0 ? "+" : "−") + Math.abs(a[5]) + "%";
+      html += "<tr>" +
+        "<td><span class='badge " + a[0] + "'>" + LV[a[0]] + "</span></td>" +
+        "<td class='ad'>" + esc(a[1]) + "</td>" +
+        "<td class='camp'>" + esc(a[2]) + "</td>" +
+        "<td class='num'>" + dec(a[3], 2) + "%</td>" +
+        "<td class='num'>" + dec(a[4], 2) + "%</td>" +
+        "<td class='num " + chgCls + "'>" + chgTxt + "</td>" +
+        "<td class='num " + freqCls + "'>" + dec(a[6], 2) + "</td>" +
+        "<td class='num'>" + tr(a[7]) + "</td>" +
+        "<td class='note'>" + esc(a[8]) + "</td>" +
+        "</tr>";
+    });
+    rows.innerHTML = html;
+  }
+
+  function apply(lv) {
+    current = lv;
+    document.querySelectorAll("#chips .chip").forEach(function (c) {
+      c.setAttribute("aria-pressed", String(c.getAttribute("data-lv") === current));
+    });
+    document.querySelectorAll(".strip button").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-lv") === current));
+    });
+    renderAds();
+  }
+
+  document.querySelectorAll(".strip button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var lv = b.getAttribute("data-lv");
+      apply(current === lv ? "all" : lv);
+      document.getElementById("p1").scrollIntoView({ block: "start" });
+    });
+  });
+  document.querySelectorAll("#chips .chip").forEach(function (c) {
+    c.addEventListener("click", function () {
+      apply(c.getAttribute("data-lv"));
+    });
+  });
+
+  // Part 2 data
+  var MSG = [
+    ["Đa khoa_Trung tâm nội soi tiêu hóa_LEADS", 4497614, 276, 16296],
+    ["đa khoa - Nội soi AI t7", 2994476, 134, 22347],
+    ["ĐA KHOA - PR NỘI SOI TIÊU HÓA", 5800123, 203, 28572],
+    ["Sản Khoa_Sama T8", 8951699, 296, 30242],
+    ["Đa khoa - NGOẠI KHOA _THU LEADS", 426180, 13, 32783],
+    ["Nhi khoa-dậy thì sớm tháng 6", 2885720, 88, 32792],
+    ["Sản Khoa_Gói ở cử sau sinh 2026", 14894860, 298, 49983],
+    ["Đa Khoa- Phẫu thuật TMH t7", 3255042, 63, 51667],
+    ["Nhi khoa - tổng quát", 5966858, 109, 54742],
+    ["Đa Khoa_Chiến dịch BHYT 2026", 4466543, 77, 58007]
+  ];
+  var LEAD = [
+    ["SẢN KHOA_PR TRUNG TÂM Ở CỮ_THU LEADS (*)", 5928155, 31, 191231],
+    ["Phụ Khoa_Chiến dịch Trade 2026 (*)", 2995829, 15, 199722],
+    ["Nhi Khoa_GÓI KHÁM TỔNG QUÁT_LEADS", 5987236, 23, 260315],
+    ["Phụ khoa_CHẠY TRADE 2026", 3049550, 8, 381194],
+    ["Đa Khoa_Gói Khám Sức Khoẻ 2026", 1947224, 5, 389445],
+    ["Bệnh viện - ACP 2026 (đang tạm dừng) (*)", 4696697, 12, 391391]
+  ];
+  var REACH = [
+    ["SẢN KHOA CHẠY TIẾP CẬN 2026", 6820659, 648543, 10517, "0,29%"],
+    ["Sản Khoa_Trung Tâm Thai Kỳ nguy cơ cao", 5999909, 535543, 11203, "0,17%"],
+    ["SẢN KHOA_CHẠY TIẾP CẬN", 4495240, 485018, 9268, "0,14%"],
+    ["ĐA KHOA_CHẠY TIẾP CẬN", 2995123, 287431, 10420, "0,31%"],
+    ["PHỤ KHOA_TƯƠNG TÁC 2026", 1757827, 201553, 8721, "0,27%"]
+  ];
+  var PLAN = [
+    ["Giảm 30%", "5 chiến dịch tiếp cận và tương tác (ưu tiên Sản khoa chạy tiếp cận, Thai kỳ nguy cơ cao)", -6.6],
+    ["Cắt khoảng 50%", "3 chiến dịch form lead trên 250.000 đ mỗi lead: Nhi khoa Gói khám tổng quát LEADS, Phụ khoa Chạy trade 2026, Gói khám sức khỏe 2026", -5.5],
+    ["Tăng", "Sản Khoa_Sama T8 (từ 8,95 lên 12,5)", 3.5],
+    ["Tăng", "Đa khoa_Trung tâm nội soi tiêu hóa_LEADS (từ 4,5 lên 7,5)", 3.0],
+    ["Tăng", "Nhi khoa-dậy thì sớm tháng 6 (từ 2,9 lên 5,0), sau khi thay creative hết hạn", 2.1],
+    ["Tăng", "đa khoa - Nội soi AI t7 (từ 3,0 lên 5,0)", 2.0],
+    ["Tăng", "ĐA KHOA - PR NỘI SOI TIÊU HÓA (từ 5,8 lên 7,3)", 1.5]
+  ];
+
+  function costRows(data, max, id) {
+    var html = "";
+    data.forEach(function (d) {
+      var w = Math.max(4, Math.round(d[3] / max * 100));
+      html += "<tr>" +
+        "<td class='ad'>" + esc(d[0]) + "</td>" +
+        "<td class='num'>" + tr(d[1]) + "</td>" +
+        "<td class='num'>" + dot(d[2]) + "</td>" +
+        "<td><div class='cpr'><div class='bar cost' style='flex:1'><i style='width:" + w + "%'></i></div><span>" + dot(d[3]) + "</span></div></td>" +
+        "</tr>";
+    });
+    document.getElementById(id).innerHTML = html;
+  }
+  costRows(MSG, 60000, "msg");
+  costRows(LEAD, 400000, "lead");
+
+  var rh = "";
+  REACH.forEach(function (d) {
+    rh += "<tr><td class='ad'>" + esc(d[0]) + "</td><td class='num'>" + tr(d[1]) + "</td><td class='num'>" + dot(d[2]) +
+      "</td><td class='num'>" + dot(d[3]) + "</td><td class='num'>" + d[4] + "</td></tr>";
+  });
+  document.getElementById("reach").innerHTML = rh;
+
+  var ph = "";
+  PLAN.forEach(function (p) {
+    var cls = p[2] < 0 ? "down" : "up";
+    var txt = (p[2] < 0 ? "−" : "+") + dec(Math.abs(p[2]), 1);
+    ph += "<tr><td class='ad'>" + p[0] + "</td><td>" + esc(p[1]) + "</td><td class='num " + cls + "'>" + txt + "</td></tr>";
+  });
+  ph += "<tr><td class='ad'>Tổng</td><td class='muted'>Chuyển 12,1 triệu từ nhóm hiệu quả thấp sang nhóm chi phí mỗi kết quả thấp nhất</td><td class='num'>0,0</td></tr>";
+  document.getElementById("plan").innerHTML = ph;
+
+  renderAds();
+})();
+</script>
+</body>
+</html>
